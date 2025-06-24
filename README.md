@@ -43,7 +43,7 @@ python -m pip install pip==24.0
 
 6\. Load pretrained_results from proposals
 
-**Note**: In this repository, you need to first download [h5 files]() of predictions for all combinations of **split** and **model_name**, and please make sure to run the following code for all combinations, too.
+**Note**: In this repository, you need to first download [h5 files](https://drive.google.com/drive/folders/1atzqDjC10pbXqZTqo_49GUzSuTdKXBNt?usp=sharing) of predictions for all combinations of **split** and **model_name**, and please make sure to run the following code for all combinations, too.
 - **split** = [train, val, test]
 - **model_name** = [HPNet, DGFNet, SmartRefine, SIMPL]
 ```
@@ -90,7 +90,7 @@ For this repository, the expected performance on Argoverse 1 validation set is:
 
 ## Getting Started in ITRI dataset
 
-We extra apply our model in ITRI dataset, which collect by Industrial Technology Research Institute in Taiwain.
+We extra apply our model in [ITRI dataset](https://drive.google.com/drive/folders/1vpsz5rH1DYWPHQIJiQyh3-I6u0AapjZc?usp=sharing), which collect by Industrial Technology Research Institute in Taiwain.
 
 1\. Preprocess ITRI to av1 format
 
@@ -102,7 +102,7 @@ python itri2av1_map.py
 
 2\. Load pretrained_results from proposals
 
-**Note**: In this repository, you need to first download [h5 files]() of predictions for all combinations of **split** and **model_name**, and please make sure to run the following code for all combinations, too.
+**Note**: In this repository, you need to first download [h5 files](https://drive.google.com/drive/folders/14eZkzi5JQYNUzOLtls4zw1N2nch-l3hB?usp=sharing) of predictions for all combinations of **split** and **model_name**, and please make sure to run the following code for all combinations, too.
 - **split** = [train, val]
 - **model_name** = [HPNet, SmartRefine]
 ```
