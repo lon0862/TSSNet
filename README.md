@@ -13,12 +13,10 @@ conda create -n TSSNet python=3.8
 conda activate TSSNet
 ```
 
-3\. Install agoverse api:
+3\. Install [Argoverse 1 API](https://github.com/argoai/argoverse-api):
+**Note**: Replace setup.py's sklearn with scikit-learn. pip should < 24.1, can use following code:
 ```
-git clone https://github.com/argoai/argoverse-api
-=> replace setup.py's sklearn with scikit-learn
 python -m pip install pip==24.0
-pip install -e argoverse-api
 ```
 
 4\. Install the dependencies:
