@@ -34,7 +34,7 @@ if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('--pred_path_root', type=str, default='pred_results_models_itri')
     parser.add_argument('--split', type=str, default='val')
-    parser.add_argument('--model_name', type=str, default='HPNet')
+    parser.add_argument('--model_name', type=str, default='HPNet', choices=['HPNet', 'DGFNet', 'SmartRefine', 'SIMPL'])
     parser.add_argument('--data_name', type=str, default='av1', choices=['av1', 'itri'])
     parser.add_argument('--split_type', type=str, default='split', choices=['split', 'continuous'])
     parser.add_argument('--obj_type', type=str, default='bimo', choices=['bimo', 'bus', 'car', 'pedestrian', 'truck'])
