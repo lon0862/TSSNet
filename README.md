@@ -89,7 +89,7 @@ python itri2av1_map.py
 
 2\. Load pretrained_results from proposals
 
-**Note**: Please make sure to run the following code for all combinations of **split** and **model_name**
+**Note**: In this repository, you need to first get h5 files of predictions for all combinations of **split** and **model_name**, and please make sure to run the following code for all combinations, too.
 - **split** = [train, val]
 - **model_name** = [HPNet, SmartRefine]
 ```
