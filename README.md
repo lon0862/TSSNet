@@ -45,7 +45,7 @@ If conda install too long
 
 6\. Load pretrained_results from proposals
 
-**Note**: Remeber to run following code for combination of all split and all model_name. split:[train, val, test], model_name: [HPNet, DGFNet, SmartRefine, SIMPL]
+**Note**: Note: Please make sure to run the following code for all combinations of split and model_name, where split = [train, val, test] and model_name = [HPNet, DGFNet, SmartRefine, SIMPL].
 ```
 cd TSSNet
 python load_h52pkl.py --pred_path_root pred_results_models --split val --data_name av1 --model_name SIMPL
