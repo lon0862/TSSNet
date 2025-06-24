@@ -38,7 +38,7 @@ cd TSSNet
 python load_h52pkl.py --pred_path_root pred_results_models --split val --data_name av1 --model_name SIMPL
 ```
 
-\.(optional) Possible error and how to solve:
+(optional) Possible error and how to solve:
 ```
 numba failed without raising an exception
 => pip install numba==0.56.4
