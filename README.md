@@ -2,7 +2,11 @@
 
 ## Getting Started
 
-1/. Clone this repository:
+1\. Clone this repository:
+```
+https://github.com/lon0862/TSSNet.git
+cd TSSNet
+```
 
 - Initialize virtual environment:
 
