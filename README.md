@@ -5,21 +5,22 @@
 1\. Clone this repository:
 ```
 https://github.com/lon0862/TSSNet.git
-cd TSSNet
 ```
 
-- Initialize virtual environment:
+2\. Create a conda environment:
+```
+conda create -n TSSNet python=3.8
+conda activate TSSNet
+```
 
-	conda create -n TSSNet python=3.8
-	conda activate TSSNet
+3\. Install agoverse api. 
+```
+git clone https://github.com/argoai/argoverse-api
+=> replace setup.py's sklearn with scikit-learn
+python -m pip install pip==24.0
+pip install -e argoverse-api
+```
 
-- Install agoverse api. 
-
-	cd ..
-	git clone https://github.com/argoai/argoverse-api
-	=> replace setup.py's sklearn with scikit-learn
-	pip install -e argoverse-api(pip<24.1)
-	=> python -m pip install pip==24.0
 	cd TSSNet
 	
 	if numba failed without raising an exception
