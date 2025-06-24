@@ -46,21 +46,18 @@ If conda install too long
 6\. Load pretrained_results from proposals
 ```
 cd TSSNet
-python load_h52pkl.py --pred_path_root pred_results_models \
-	--split val --data_name av1 --model_name SIMPL
+python load_h52pkl.py --pred_path_root pred_results_models --split val --data_name av1 --model_name SIMPL
 ```
 
-- Train
-	python train.py --init_pred_root pred_results_models/pkl \
-	--train_batch_size 16 --val_batch_size 16 \
-	--max_epochs 24 --T_max 24 \
-	--iter_num 2 --recurr_num 10
+## Training 
+```
+python train.py --init_pred_root pred_results_models/pkl --train_batch_size 16 --val_batch_size 16 --max_epochs 24 --T_max 24 --iter_num 2 --recurr_num 10
+```
 
-- Eval 
-	python val.py --init_pred_root ./pred_results_models/pkl \
-	--ckpt_path pretrained_checkpoints/av1_checkpoint.ckpt \
-	--val_batch_size 16 --iter_num 2 --recurr_num 10
-
+## Evaluation
+```
+python val.py --init_pred_root ./pred_results_models/pkl --ckpt_path pretrained_checkpoints/av1_checkpoint.ckpt --val_batch_size 16 --iter_num 2 --recurr_num 10
+```
 - Test 
 	python test.py --init_pred_root ./pred_results_models/pkl \
 	--ckpt_path pretrained_checkpoints/av1_checkpoint.ckpt \
