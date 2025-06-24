@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+Step 1: clone this repository:
+
 - Initialize virtual environment:
 
 	conda create -n TSSNet python=3.8
