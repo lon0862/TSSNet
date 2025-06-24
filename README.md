@@ -1,6 +1,6 @@
 # TSSNet
 
-## Getting Started
+## Getting Started in Argoverse 1
 
 1\. Clone this repository:
 ```
@@ -49,29 +49,32 @@ cd TSSNet
 python load_h52pkl.py --pred_path_root pred_results_models --split val --data_name av1 --model_name SIMPL
 ```
 
-## Training 
+### Training 
 ```
 python train.py --init_pred_root pred_results_models/pkl --train_batch_size 16 --val_batch_size 16 --max_epochs 24 --T_max 24 --iter_num 2 --recurr_num 10
 ```
 
-## Evaluation
+### Evaluation
 ```
 python val.py --init_pred_root ./pred_results_models/pkl --ckpt_path pretrained_checkpoints/av1_checkpoint.ckpt --val_batch_size 16 --iter_num 2 --recurr_num 10
 ```
-- Test 
-	python test.py --init_pred_root ./pred_results_models/pkl \
-	--ckpt_path pretrained_checkpoints/av1_checkpoint.ckpt \
-	--test_batch_size 16 --iter_num 2 --recurr_num 10
 
-- ITRI dataset
-- ITRI2av1 format
-	python itri2av1_track.py --split_type continuous
-	python itri2av1_map.py
+### Testing 
+```	
+python test.py --init_pred_root ./pred_results_models/pkl --ckpt_path pretrained_checkpoints/av1_checkpoint.ckpt --test_batch_size 16 --iter_num 2 --recurr_num 10
+```
 
-- load pretrained_results from proposals
-	python load_h52pkl.py --pred_path_root pred_results_models_itri \
-	--data_name itri --split_type continuous --obj_type car \
-	--model_name SIMPL --split val 
+## Getting Started in ITRI dataset
+1\. Preprocess ITRI to av1 format
+```
+python itri2av1_track.py --split_type continuous
+python itri2av1_map.py
+```
+
+2\. Load pretrained_results from proposals
+```
+python load_h52pkl.py --pred_path_root pred_results_models_itri --data_name itri --split_type continuous --obj_type car --model_name SIMPL --split val 
+```
 
 - Train 
 	python train.py 
