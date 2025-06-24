@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-Step 1: clone this repository:
+1/. Clone this repository:
 
 - Initialize virtual environment:
 
