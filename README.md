@@ -28,9 +28,24 @@ pip install torch_geometric==2.3.1
 conda install pytorch-lightning==2.0.3
 ```
 
-5\. Load pretrained_results from proposals
+5\. Download [Argoverse Motion Forecasting Dataset v1.1](https://www.argoverse.org/av1.html). After downloading and extracting the tar.gz files, the dataset directory should be organized as follows:
+```
+/path/to/dataset_root/
+├── train/
+|   └── data/
+|       ├── 1.csv
+|       ├── 2.csv
+|       ├── ...
+└── val/
+    └── data/
+        ├── 1.csv
+        ├── 2.csv
+        ├── ...
+```
 
-**Note**: In this repository, you need to first get h5 files of predictions for all combinations of **split** and **model_name**, and please make sure to run the following code for all combinations, too.
+6\. Load pretrained_results from proposals
+
+**Note**: In this repository, you need to first download [h5 files]() of predictions for all combinations of **split** and **model_name**, and please make sure to run the following code for all combinations, too.
 - **split** = [train, val, test]
 - **model_name** = [HPNet, DGFNet, SmartRefine, SIMPL]
 ```
@@ -89,7 +104,7 @@ python itri2av1_map.py
 
 2\. Load pretrained_results from proposals
 
-**Note**: In this repository, you need to first get h5 files of predictions for all combinations of **split** and **model_name**, and please make sure to run the following code for all combinations, too.
+**Note**: In this repository, you need to first download [h5 files]() of predictions for all combinations of **split** and **model_name**, and please make sure to run the following code for all combinations, too.
 - **split** = [train, val]
 - **model_name** = [HPNet, SmartRefine]
 ```
