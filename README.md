@@ -70,6 +70,7 @@ python test.py --init_pred_root ./pred_results_models/pkl --ckpt_path pretrained
 
 ## Getting Started in ITRI dataset
 1\. Preprocess ITRI to av1 format
+
 **Note**: We split the ITRI dataset using a sliding window of size 1 and selected **car** as the target agent type.
 ```
 python itri2av1_track.py --split_type continuous
@@ -77,6 +78,7 @@ python itri2av1_map.py
 ```
 
 2\. Load pretrained_results from proposals
+
 **Note**: Please make sure to run the following code for all combinations of **split** and **model_name**
 - **split** = [train, val]
 - **model_name** = [HPNet, SmartRefine]
