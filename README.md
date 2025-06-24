@@ -13,20 +13,14 @@ conda create -n TSSNet python=3.8
 conda activate TSSNet
 ```
 
-3\. Install [Argoverse 1 API](https://github.com/argoai/argoverse-api):
-**Note**: Replace setup.py's sklearn with scikit-learn. pip should < 24.1, can use following code:
-```
-python -m pip install pip==24.0
-```
-
-4\. Install the dependencies:
+3\. Install the dependencies:
 ```
 conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
 pip install torch_geometric==2.3.1
 conda install pytorch-lightning==2.0.3
 ```
 
-5\. Download [Argoverse Motion Forecasting Dataset v1.1](https://www.argoverse.org/av1.html). After downloading and extracting the tar.gz files, the dataset directory should be organized as follows:
+4\. Download [Argoverse Motion Forecasting Dataset v1.1](https://www.argoverse.org/av1.html). After downloading and extracting the tar.gz files, the dataset directory should be organized as follows:
 ```
 /path/to/dataset_root/
 ├── train/
@@ -39,6 +33,12 @@ conda install pytorch-lightning==2.0.3
         ├── 1.csv
         ├── 2.csv
         ├── ...
+```
+
+5\. Install [Argoverse 1 API](https://github.com/argoai/argoverse-api):
+**Note**: Replace setup.py's sklearn with scikit-learn. pip should < 24.1, can use following code:
+```
+python -m pip install pip==24.0
 ```
 
 6\. Load pretrained_results from proposals
