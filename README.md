@@ -45,7 +45,7 @@ If conda install too long
 
 6\. Load pretrained_results from proposals
 
-**Note**: Please make sure to run the following code for all combinations of **split** and **model_name**
+**Note**: In this repository, you need to first get h5 files of predictions for all combinations of **split** and **model_name**, and please make sure to run the following code for all combinations, too.
 - **split** = [train, val, test]
 - **model_name** = [HPNet, DGFNet, SmartRefine, SIMPL]
 ```
@@ -68,7 +68,17 @@ python val.py --init_pred_root ./pred_results_models/pkl --ckpt_path pretrained_
 python test.py --init_pred_root ./pred_results_models/pkl --ckpt_path pretrained_checkpoints/av1_checkpoint.ckpt --test_batch_size 16 --iter_num 2 --recurr_num 10
 ```
 
+### Quantitative Results
+
+For this repository, the expected performance on Argoverse 1 validation set is:
+| Models | minADE | minFDE | MR |
+| :--- | :---: | :---: | :---: |
+| TSSNet | 0.611 | 0.824 | 0.063 |
+
 ## Getting Started in ITRI dataset
+
+We extra apply our model in ITRI dataset, which collect by Industrial Technology Research Institute in Taiwain.
+
 1\. Preprocess ITRI to av1 format
 
 **Note**: We split the ITRI dataset using a sliding window of size 1 and selected **car** as the target agent type.
