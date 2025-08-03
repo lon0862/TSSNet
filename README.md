@@ -1,4 +1,4 @@
-# TSSNet
+# TSSNet: Motion Forecasting by Refining Trajectories from Heterogeneous Model Predictions
 
 ## Getting Started in Argoverse 1
 
