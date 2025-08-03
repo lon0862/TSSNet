@@ -10,7 +10,7 @@ from losses import CELoss
 from metrics import BrierMinFDE, MR, MinADE, MinFDE
 
 from modules.backbone import Backbone
-from utils.visual_utils import draw_quartiles, AV1Visualize3D
+from utils.visual_utils import draw_quartiles, AV1Visualize3D, AV1Visualize3D_local, draw_curve, draw_speed_scatter
 from utils.algo import moving_average_smoothing
 
 class TSSNet(pl.LightningModule):
@@ -55,8 +55,10 @@ class TSSNet(pl.LightningModule):
 
         self.split = args.split if hasattr(args, 'split') else None
         self.seed = args.seed
-        self.instability_mask = torch.tensor([]).cuda()
         self.total_metric_results = torch.tensor([]).cuda()
+        self.min_results_by_velocity = []
+        self.all_min_results = torch.tensor([]).cuda()
+        self.all_gt_speed = torch.tensor([]).cuda()
 
     def save_ckpt(self, dir_path, save_input, epoch, split='train'):  
         loss, cls_loss, minade, minfde, mr = save_input
@@ -100,6 +102,38 @@ class TSSNet(pl.LightningModule):
             self.val_minFDE.reset()
             self.val_MR.reset()
 
+    def process_with_velocity_mask(self, refine_pred_best, gt_eval, metric='minFDE'):
+        gt_vec = gt_eval[:,1:] - gt_eval[:,:-1]
+        gt_len = torch.norm(gt_vec, p=2, dim=-1).sum(dim=-1)
+        minFDE = torch.norm(refine_pred_best[:, -1,:2] - gt_eval[:, -1], p=2, dim=-1)
+        minADE = torch.norm(refine_pred_best[:,:,:2] - gt_eval, p=2, dim=-1).mean(dim=1)
+
+        # self.all_min_results = torch.cat([self.all_min_results, minFDE], dim=0)
+        # self.all_gt_speed = torch.cat([self.all_gt_speed, gt_len/3], dim=0)
+
+        max_len = 26
+        if len(self.min_results_by_velocity) == 0:
+            for i in range(max_len):
+                self.min_results_by_velocity.append(torch.tensor([]).cuda())
+        
+        min_value = 0
+        max_value = 0
+        len_step = 2.5
+        for i in range(max_len):
+            min_value = i * len_step
+            max_value = (i+1) * len_step
+            if i != (max_len-1):
+                mask = torch.logical_and((gt_len > min_value), (gt_len <= max_value))
+            else:
+                mask = gt_len > min_value
+
+            if metric == 'minFDE':
+                valid_minFDE = minFDE[mask]
+                self.min_results_by_velocity[i] = torch.cat([self.min_results_by_velocity[i], valid_minFDE], dim=0)
+            elif metric == 'minADE':
+                valid_minADE = minADE[mask]
+                self.min_results_by_velocity[i] = torch.cat([self.min_results_by_velocity[i], valid_minADE], dim=0)
+
     def calculate_metrics(self, refine_loc, pi, gt_eval, split='train'):
         B = refine_loc.shape[0]
         fde = torch.norm(refine_loc[:, :, -1,:2] - gt_eval[:, -1].unsqueeze(1), p=2, dim=-1)
@@ -107,6 +141,7 @@ class TSSNet(pl.LightningModule):
         refine_pred_best = refine_loc[torch.arange(refine_loc.size(0)), best_mode]
         pi_best = pi[torch.arange(B), best_mode] 
 
+        # self.process_with_velocity_mask(refine_pred_best, gt_eval, metric='minADE')
         if split == 'train':
             self.train_brier_minFDE.update(refine_pred_best[..., :2], gt_eval, pi_best)
             self.train_minADE.update(refine_pred_best[..., :2], gt_eval)
@@ -204,8 +239,10 @@ class TSSNet(pl.LightningModule):
         # self.calculate_metrics_all_models(data, agent_index, refine_traj_ls[-1], init_agent)
         # self.collect_quartiles(data, agent_index, refine_traj_ls[-1], init_agent, metric='FDE')
         # viz_wrapper = AV1Visualize3D()
+        # viz_wrapper = AV1Visualize3D_local()
         # viz_wrapper.visual_map_agents(data, init_agent, refine_traj_ls[-1], agent_index)
 
+        
         return agent_index, refine_traj_ls, pi_ls
 
     def training_step(self, data, batch_idx):
@@ -258,6 +295,11 @@ class TSSNet(pl.LightningModule):
       
     def on_validation_epoch_end(self):
         # draw_quartiles(self.total_metric_results, metric='FDE')
+        # for i in range(len(self.min_results_by_velocity)):
+        #     print(i, self.min_results_by_velocity[i].mean().item())
+        # draw_curve(self.min_results_by_velocity, metric='minADE')
+        # draw_speed_scatter(self.all_min_results, self.all_gt_speed)
+
         # assert 0
         if self.trainer.global_rank == 0:
             print("sample counts: ", self.val_minFDE.count.item())

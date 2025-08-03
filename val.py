@@ -33,7 +33,7 @@ if __name__ == '__main__':
     parser.add_argument('--recurr_num', type=int, default=1)
     parser.add_argument('--iter_num', type=int, default=1)
 
-    parser.add_argument('--root', type=str, default='../../sda/self_driving/argoverse_data1')
+    parser.add_argument('--root', type=str, default='../argoverse_data1')
     parser.add_argument('--processed_root', type=str, default='../av1_processed')
     parser.add_argument('--init_pred_root', type=str, default='./pred_results_models/pkl')
     

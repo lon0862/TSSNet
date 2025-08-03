@@ -4,6 +4,7 @@ import pytorch_lightning as pl
 from datasets import ArgoverseV1Dataset_models
 from torch_geometric.loader import DataLoader
 from model import TSSNet
+import os
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -33,7 +34,7 @@ if __name__ == '__main__':
     parser.add_argument('--recurr_num', type=int, default=1)
     parser.add_argument('--iter_num', type=int, default=1)
 
-    parser.add_argument('--root', type=str, default='../../sda/self_driving/argoverse_data1')
+    parser.add_argument('--root', type=str, default='../argoverse_data1')
     parser.add_argument('--processed_root', type=str, default='../av1_processed')
     parser.add_argument('--init_pred_root', type=str, default='./pred_results_models/pkl')
     
@@ -44,7 +45,7 @@ if __name__ == '__main__':
 
     pl.seed_everything(args.seed, workers=True)
     
-    # checkpoint_dir = 'lightning_logs/version_14/checkpoints/'
+    # checkpoint_dir = 'lightning_logs/version_0/checkpoints/'
     # checkpoint_dir = os.path.join(args.ckpt_path, checkpoint_dir)
     # checkpoint_path = os.path.join(checkpoint_dir, 'last.ckpt')
     checkpoint_path = args.ckpt_path
